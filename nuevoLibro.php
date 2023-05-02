@@ -1,5 +1,42 @@
 <?php
 require_once "conexion/conexion.php";
+
+if (isset($_POST['nuevoLibro'])) {
+    $isbn = $_REQUEST['isbn'];
+    $nombre = $_REQUEST['nombre'];
+    $autor = $_REQUEST['autor'];
+    $descripcion = $_REQUEST['descripcion'];
+    $estatus = $_REQUEST['estatus'];
+    $idUsuario = $_REQUEST['idUsuario'];
+
+    // Check if file was uploaded without errors
+    if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0) {
+        $filename = $_FILES["foto"]["name"];
+        $tempname = $_FILES["foto"]["tmp_name"];
+        $folder = "uploads/".$filename;
+
+        // Move uploaded file to uploads folder
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "Imagen subida con éxito.";
+        } else {
+            echo "Error al subir la imagen.";
+        }
+    } else {
+        echo "Error: No se seleccionó ninguna imagen.";
+    }
+
+    $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario, foto) 
+            VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."', '".$filename."');";
+
+    if ($conn->query($sql) === TRUE) {
+        echo '<h2>Registro de libro Exitoso</h2><br><br>';
+        echo '<div class="button-container">';
+        echo '<a href="index.php"><button type="button" class="adopt-button">Salir</button><a>';
+        echo '</div>';
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +48,7 @@ require_once "conexion/conexion.php";
 </head>
 <body>
   <h1>Registro de Nuevo Libro</h1>
-  <form action="" method="post">
+  <form action="" method="post" enctype="multipart/form-data">
     <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" onkeyup="buscarLibros()">
     <button type="button" onclick="buscarLibro()">Buscar</button><br><br>
@@ -21,37 +58,13 @@ require_once "conexion/conexion.php";
     <input type="text" id="autor" name="autor"><br><br>
     <label for="descripcion">Descripción:</label>
     <input type="text" id="descripcion" name="descripcion"><br><br>
+    <label for="foto">Foto:</label>
+    <input type="file" id="foto" name="foto"><br><br>
     <input type="hidden" id="estatus" name="estatus" value="1">
     <input type="hidden" id="idUsuario" name="idUsuario" value="1">
     <input type="submit" name="nuevoLibro" value="Guardar">
     
   </form>
-    <?php
-        if (isset($_POST['nuevoLibro'])) {
-
-            $isbn = $_REQUEST['isbn'];
-            $nombre = $_REQUEST['nombre'];
-            $autor = $_REQUEST['autor'];
-            $descripcion = $_REQUEST['descripcion'];
-            $estatus = $_REQUEST['estatus'];
-            $idUsuario = $_REQUEST['idUsuario'];
-
-            $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario) 
-                     VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."');";
-
-           
-            if ($conn->query($sql) === TRUE) {
-                echo '<h2>Registro de libro Exitoso</h2><br><br>';
-                echo '<div class="button-container">';
-                echo '<a href="index.php"><button type="button" class="adopt-button">Salir</button><a>';
-                echo '</div>';
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        }
-
-    ?>
-
   <script>
     
     function buscarLibro() {
