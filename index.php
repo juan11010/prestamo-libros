@@ -8,6 +8,8 @@
     </head>
     <body>
         <h1>Prestamo de libros personales</h1>
-    
+        <a href="nuevoUsuario.php">Nuevo usuario</a>
+        <a href="nuevoLibro.php">Nuevo Libro</a>
+        <a href="miPerfil.php">Mi perfil</a>
     </body>
 </html>

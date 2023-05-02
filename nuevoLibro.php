@@ -1,3 +1,6 @@
+<?php
+require_once "conexion/conexion.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
 </head>
 <body>
   <h1>Registro de Nuevo Libro</h1>
-  <form action="guardarLibro.php" method="post">
+  <form action="nuevoLibro.php" method="post">
     <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" onkeyup="buscarLibros()">
     <button type="button" onclick="buscarLibro()">Buscar</button><br><br>
@@ -20,8 +23,39 @@
     <input type="text" id="descripcion" name="descripcion"><br><br>
     <input type="hidden" id="estatus" name="estatus" value="1">
     <input type="hidden" id="idUsuario" name="idUsuario" value="1">
-    <input type="submit" value="Guardar">
+    <input type="submit" name="nuevoLibro" value="Guardar">
+    
   </form>
+    <?php
+        if (isset($_POST['nuevoLibro'])) {
+
+            //$nombre = $_REQUEST['nombre'];
+            //$username = $_REQUEST['username'];
+            //$password = $_REQUEST['pwd'];
+            $isbn = $_REQUEST['isbn'];
+            $nombre = $_REQUEST['nombre'];
+            $autor = $_REQUEST['autor'];
+            $descripcion = $_REQUEST['descripcion'];
+            $estatus = $_REQUEST['estatus'];
+            $idUsuario = $_REQUEST['idUsuario'];
+
+            $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario) 
+                     VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."');";
+
+            $conn->query($sql);
+
+            if ($conn->query($sql) === TRUE) {
+                echo '<h2>Registro de libro Exitoso</h2><br><br>';
+                echo '<div class="button-container">';
+                echo '<a href="index.php"><button type="button" class="adopt-button">Salir</button><a>';
+                echo '</div>';
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
+
+    ?>
+
   <script>
     
     function buscarLibro() {
