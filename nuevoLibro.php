@@ -11,7 +11,7 @@ require_once "conexion/conexion.php";
 </head>
 <body>
   <h1>Registro de Nuevo Libro</h1>
-  <form action="nuevoLibro.php" method="post">
+  <form action="" method="post">
     <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" onkeyup="buscarLibros()">
     <button type="button" onclick="buscarLibro()">Buscar</button><br><br>
@@ -29,9 +29,6 @@ require_once "conexion/conexion.php";
     <?php
         if (isset($_POST['nuevoLibro'])) {
 
-            //$nombre = $_REQUEST['nombre'];
-            //$username = $_REQUEST['username'];
-            //$password = $_REQUEST['pwd'];
             $isbn = $_REQUEST['isbn'];
             $nombre = $_REQUEST['nombre'];
             $autor = $_REQUEST['autor'];
@@ -42,8 +39,7 @@ require_once "conexion/conexion.php";
             $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario) 
                      VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."');";
 
-            $conn->query($sql);
-
+           
             if ($conn->query($sql) === TRUE) {
                 echo '<h2>Registro de libro Exitoso</h2><br><br>';
                 echo '<div class="button-container">';
