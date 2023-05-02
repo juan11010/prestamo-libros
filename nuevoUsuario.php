@@ -33,7 +33,6 @@ require_once "conexion/conexion.php";
         $password = $_REQUEST['pwd'];
         $sql = "INSERT INTO usuarios (nombre, username, password, tipo, librosTomados, librosPrestados) 
                  VALUES ('".$nombre."', '".$username."', '".$password."', 1, 0, 0);";
-        $conn->query($sql);
 
         if ($conn->query($sql) === TRUE) {
             echo '<h2>Registro Exitoso</h2><br><br>';
