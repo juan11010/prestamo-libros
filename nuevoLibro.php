@@ -59,7 +59,7 @@ if (isset($_POST['nuevoLibro'])) {
     <label for="descripcion">Descripción:</label>
     <input type="text" id="descripcion" name="descripcion"><br><br>
     <label for="foto">Foto:</label>
-    <input type="file" id="foto" name="foto"><br><br>
+    <input type="file" id="foto" name="foto" accept="image/*"><br><br>
     <input type="hidden" id="estatus" name="estatus" value="1">
     <input type="hidden" id="idUsuario" name="idUsuario" value="1">
     <input type="submit" name="nuevoLibro" value="Guardar">
