@@ -46,9 +46,8 @@ $result = $conn->query($sql);
     </style>
     <body>
         <h1>Hola Internauta</h1>
-        <a href="nuevoUsuario.php">Nuevo usuario</a>
-        <a href="nuevoLibro.php">Nuevo Libro</a>
-        <a href="miPerfil.php">Mi perfil</a>
+        <a href="nuevoUsuario.php">Registrarse</a>
+        <a href="loginForm.php">Login</a>
         <br>
         <!-- Inicio de zona para mostrar libros -->
         <div>
