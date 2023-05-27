@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+// aqui puedes agregar mas variables de session
+$user = $_SESSION['username'];
+
+if (!isset($user)) {
+    header("location: loginForm.php");
+    exit();
+}
+?>
+
+<?php
 require_once "conexion/conexion.php";
 
 // Obtener el id del libro seleccionado

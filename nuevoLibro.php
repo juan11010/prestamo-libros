@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+$user = $_SESSION['username'];
+$userID = $_SESSION['id'];
+
+if (!isset($user) && !isset($userID)) {
+    header("location: loginForm.php");
+    exit();
+}
+?>
+
+<?php
 require_once "conexion/conexion.php";
 
 if (isset($_POST['nuevoLibro'])) {
@@ -7,7 +19,7 @@ if (isset($_POST['nuevoLibro'])) {
     $autor = $_REQUEST['autor'];
     $descripcion = $_REQUEST['descripcion'];
     $estatus = $_REQUEST['estatus'];
-    $idUsuario = $_REQUEST['idUsuario'];
+    $idUsuario = $userID;
 
     // Check if file was uploaded without errors
     if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0) {
@@ -31,7 +43,7 @@ if (isset($_POST['nuevoLibro'])) {
     if ($conn->query($sql) === TRUE) {
         echo '<h2>Registro de libro Exitoso</h2><br><br>';
         echo '<div class="button-container">';
-        echo '<a href="index.php"><button type="button" class="adopt-button">Salir</button><a>';
+        echo '<a href="miPerfil.php"><button type="button" class="adopt-button">Salir</button><a>';
         echo '</div>';
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -47,7 +59,7 @@ if (isset($_POST['nuevoLibro'])) {
     <title>Nuevo Libro</title>
 </head>
 <body>
-  <h1>Registro de Nuevo Libro</h1>
+        <h1>Registro de Nuevo Libro</h1>
   <form action="" method="post" enctype="multipart/form-data">
     <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" onkeyup="buscarLibros()">
@@ -61,7 +73,6 @@ if (isset($_POST['nuevoLibro'])) {
     <label for="foto">Foto:</label>
     <input type="file" id="foto" name="foto" accept="image/*"><br><br>
     <input type="hidden" id="estatus" name="estatus" value="1">
-    <input type="hidden" id="idUsuario" name="idUsuario" value="1">
     <input type="submit" name="nuevoLibro" value="Guardar">
     
   </form>
