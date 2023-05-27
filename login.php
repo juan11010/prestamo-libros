@@ -13,7 +13,7 @@ if(isset($_POST['login'])) {
 
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    $id = $row['id'];
+    $id = $row['idUsuario'];
     $nombre = $row['nombre'];
     $tipo = $row['tipo'];
 
