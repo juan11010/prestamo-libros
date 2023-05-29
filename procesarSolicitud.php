@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+// aqui puedes agregar mas variables de session
+$user = $_SESSION['username'];
+$userID = $_SESSION['id'];
+
+if (!isset($user)) {
+    header("location: loginForm.php");
+    exit();
+}
+?>
+<?php
 require_once "conexion/conexion.php";
 
 // Obtener el id del libro seleccionado
@@ -12,7 +24,7 @@ $fechaEntrega = $_POST['fechaEntrega'];
 $telefonoSolicitante = $_POST['telefonoSolicitante'];
 
 // ID del usuario (temporalmente establecido como 8)
-$idUsuario = 8;
+$idUsuario = $userID;
 
 // Actualizar el registro en la tabla prestamoRel
 $sql = "INSERT INTO prestamoRel (idLibros, idUsuario, fechaPrestamo, fechaEntrega, estatus)
@@ -30,7 +42,7 @@ if ($conn->query($sql) === TRUE) {
     echo '<h2>Solicitud de libro exitosa</h2>';
     echo '<p>Libro solicitado correctamente.</p>';
     echo '<div class="button-container">';
-    echo '<a href="index.php"><button type="button" class="adopt-button">Salir</button></a>';
+    echo '<a href="miPerfil.php"><button type="button" class="adopt-button">Salir</button></a>';
     echo '</div>';
 } else {
     echo 'Error al solicitar el libro: ' . $conn->error;

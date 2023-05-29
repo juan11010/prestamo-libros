@@ -61,8 +61,7 @@ $result = $conn->query($sql);
 <body>
         <h1>Hola <?php echo $user; ?></h1>
     <a href="nuevoLibro.php">Prestar libro</a>
-    <a href="librosTomados.php">Libros tomados</a>
-    <a href="librosPrestados.php">Libros prestados</a>
+    <a href="misLibros.php">Mis Libros</a>
     <a href="logout.php">Salir</a>
     <br>
     <!-- Inicio de zona para mostrar libros -->

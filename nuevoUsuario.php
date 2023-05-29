@@ -12,7 +12,7 @@ require_once "conexion/conexion.php";
 </head>
 
 <body>
-    <form action="nuevoUsuario.php" method="post">
+    <form action="nuevoUsuario.php" method="post" class="form-example">
         <h2>Registro de nuevo usuario</h2>
         <label for="name">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
