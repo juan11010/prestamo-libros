@@ -16,7 +16,7 @@ require_once "conexion/conexion.php";
 
 // Obtener los libros de la base de datos
 $sql = "SELECT * FROM libros WHERE idUsuario = $userID";
-$sql1 = "SELECT p.*, l.* FROM prestamoRel p JOIN libros l ON p.idLibros = l.idLibros WHERE p.idUsuario = $userID";
+$sql1 = "SELECT p.*, l.* FROM prestamoRel p JOIN libros l ON p.idLibros = l.idLibros WHERE p.idUsuario = $userID AND p.estatus = 1";
 
 
 $result = $conn->query($sql);
