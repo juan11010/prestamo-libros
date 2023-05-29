@@ -12,16 +12,21 @@ if (!isset($user)) {
 <?php
 require_once "conexion/conexion.php";
 
-// Obtener el estado del checkbox
+// Obtener el estado del checkbox 
 $mostrarSoloAdmins = isset($_POST['mostrar_solo_disponibles']) ? true : false;
 
-// Obtener los libros de la base de datos
+// Obtener los usuarios de la base de datos
 $sql = "SELECT * FROM usuarios";
 if ($mostrarSoloAdmins) {
     $sql .= " WHERE estatus = 1";
 }
 
 $result = $conn->query($sql);
+
+//obtener los libros de la base de datos
+$sql2 = "SELECT * FROM libros";
+$result2 = $conn->query($sql2);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,46 +38,46 @@ $result = $conn->query($sql);
     <link href="css/estilo.css" rel="stylesheet">
 </head>
 <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #333;
+        margin-top: 20px;
+    }
+
+    a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #007bff;
+    }
+
     table {
-        border-collapse: collapse;
         width: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    th,
-    td {
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .button-container {
+        border-collapse: collapse;
         margin-top: 10px;
     }
 
-    .book-image {
-        max-height: 150px;
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
     }
 </style>
 
+
 <body>
-        <h1>Hola <?php echo $user; ?></h1>
-<!--     <a href="nuevoLibro.php">Prestar libro</a>
+    <h1>Hola <?php echo $user; ?></h1>
+    <a href="nuevoLibro.php">Prestar libro</a>
     <a href="librosTomados.php">Libros tomados</a>
     <a href="librosPrestados.php">Libros prestados</a>
- -->    <a href="logout.php">Salir</a>
+    <a href="logout.php">Salir</a>
     <br>
     <!-- Inicio de zona para mostrar libros -->
     <div>
         <h1>Usuarios:</h1>
-        <form method="POST">
-            <label for="mostrar_solo_disponibles">Mostrar solo administradores:</label>
-            <input type="checkbox" id="mostrar_solo_disponibles" name="mostrar_solo_disponibles" <?php echo $mostrarSoloAdmins ? 'checked' : ''; ?>>
-            <input type="submit" value="Filtrar">
-        </form>
+        <!-- TABLA USUARIOS -->
 
        <table>
             <tr>
@@ -107,39 +112,39 @@ $result = $conn->query($sql);
             <?php endwhile; ?>
         </table>
         
-        <!-- TABLA USUARIOS -->
+        <h1>Libros</h1>
+        <!-- TABLA LIBROS -->
         <table>
             <tr>
                 <th>Nombre</th>
-                <th>Username</th>
-                <th>Tipo</th>
-                <th>Libros tomados</th>
-                <th>Libros prestados</th>
+                <th>Autor</th>
+                <th>Descripción</th>
+                <th>Estatus</th>
                 <th>Acción</th>
             </tr>
-            <?php while ($row = $result->fetch_assoc()) : ?>
+            <?php while ($row = $result2->fetch_assoc()) : ?>
                 <tr>
                     <td><?php echo $row['nombre']; ?></td>
-                    <td><?php echo $row['username']; ?></td>
+                    <td><?php echo $row['autor']; ?></td>
+                    <td><?php echo $row['descripcion']; ?></td>
                     <td>
-                        <?php if ($row['tipo'] == 1) :
-                            echo 'Administrador';
+                        <?php if ($row['estatus'] == 1) :
+                            echo 'Disponible';
                         ?>
 
                         <?php else : ?>
-                            <?php echo 'Usuario'; ?>
+                            <?php echo 'No disponible'; ?>
                         <?php endif; ?>
-                    </td>
-                    <td><?php echo $row['librosTomados']; ?></td>
-                    <td><?php echo $row['librosPrestados']; ?></td>
                     <td>
                         <?php 
-                            echo  '<a href="eliminarUsuario.php?idUsuario=' . $row['idUsuario'] . '">Eliminar</a>';
+                            echo  '<a href="eliminarLibro.php?idLibro=' . $row['idLibros'] . '">Eliminar</a>';
                         ?>
                     </td>
                 </tr>
             <?php endwhile; ?>
         </table>
+
+
 
     </div>
 </body>

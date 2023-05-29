@@ -32,31 +32,32 @@ $result1 = $conn->query($sql1);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/estilos.css" rel="stylesheet">
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    body {
+        font-family: Arial, sans-serif;
+    }
 
-        th,
-        td {
-            text-align: left;
-            padding: 8px;
-        }
+    h1 {
+        color: #333;
+        margin-top: 20px;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
 
-        .button-container {
-            margin-top: 10px;
-        }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
 
-        .book-image {
-            max-height: 150px;
-        }
-    </style>
-</head>
+    .book-image {
+        max-width: 100px;
+        max-height: 100px;
+    }
+</style></head>
 
 <body>
 

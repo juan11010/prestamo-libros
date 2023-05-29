@@ -22,6 +22,11 @@ if ($mostrarSoloDisponibles) {
 }
 
 $result = $conn->query($sql);
+
+// Obtener los prestamos de la base de datos
+$sql2 = "SELECT * FROM prestamorel";
+$result2 = $conn->query($sql2);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -96,6 +101,8 @@ $result = $conn->query($sql);
     <br>
     <!-- Inicio de zona para mostrar libros -->
     <div>
+        <!--  si fechaPrestamo es dentro de 7 dias, mostrar un echo que diga que el libro esta proximo a vencer -->
+        
         <h1>Libros disponibles:</h1>
         <form method="POST">
             <label for="mostrar_solo_disponibles">Mostrar solo disponibles:</label>
