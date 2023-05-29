@@ -1,3 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -52,7 +59,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 
 
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -62,7 +69,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #007bffcD;
 }
 
 span {
@@ -70,7 +77,7 @@ span {
 }
 
 .button-example {
-	background-color: #4CAF50;
+	background-color: #007bff;
 	color: white;
 	padding: 12px 20px;
 	border: none;
@@ -85,11 +92,11 @@ cursor: not-allowed;
 }
 
 .button-example:hover {
-	background-color: #45a049;
+	background-color: #007bffcD;
 }
 
 .button-search {
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -104,5 +111,12 @@ cursor: not-allowed;
 }
 
 .button-search:hover {
-  background-color: #45a049;
+  background-color: #007bffcD;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
