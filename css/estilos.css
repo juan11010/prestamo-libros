@@ -87,3 +87,22 @@ cursor: not-allowed;
 .button-example:hover {
 	background-color: #45a049;
 }
+
+.button-search {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button-search.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-search:hover {
+  background-color: #45a049;
+}

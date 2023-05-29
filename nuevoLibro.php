@@ -55,6 +55,7 @@ if (isset($_POST['nuevoLibro'])) {
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/a4c5675b6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <title>Nuevo Libro</title>
@@ -64,7 +65,7 @@ if (isset($_POST['nuevoLibro'])) {
   <form action="" method="post" enctype="multipart/form-data" class="form-example">
     <label for="isbn">ISBN:</label>
     <input type="text" id="isbn" name="isbn" onkeyup="buscarLibros()">
-    <button type="button" onclick="buscarLibro()" class="button-example">Buscar</button><br><br>
+    <button type="button" onclick="buscarLibro()" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button><br><br>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre"><br><br>
     <label for="autor">Autor:</label>
