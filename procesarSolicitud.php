@@ -39,12 +39,12 @@ if ($conn->query($sql) === TRUE) {
     $sql = "UPDATE libros SET estatus = 0 WHERE idLibros = $idLibro";
     $conn->query($sql);
 
-    echo '<h2>Solicitud de libro exitosa</h2>';
-    echo '<p>Libro solicitado correctamente.</p>';
+    echo '<h2 style="font-family: Arial, sans-serif;">Solicitud de libro exitosa</h2>';
+    echo '<p style="font-family: Arial, sans-serif;">Libro solicitado correctamente.</p>';
     echo '<div class="button-container">';
     echo '<a href="miPerfil.php"><button type="button" class="adopt-button">Salir</button></a>';
     echo '</div>';
-} else {
+    } else {
     echo 'Error al solicitar el libro: ' . $conn->error;
 }
 

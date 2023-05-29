@@ -33,28 +33,58 @@ $result = $conn->query($sql);
     <link href="css/estilo.css" rel="stylesheet">
 </head>
 <style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    th,
-    td {
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
+    body {
+        font-family: Arial, sans-serif;
         background-color: #f2f2f2;
+        margin: 0;
+        padding: 20px;
     }
 
-    .button-container {
-        margin-top: 10px;
+    h1 {
+        color: #333;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
     }
 
     .book-image {
-        max-height: 150px;
+        max-width: 100px;
+        max-height: 100px;
     }
 </style>
 

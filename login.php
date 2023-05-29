@@ -30,9 +30,11 @@ if(isset($_POST['login'])) {
             header("Location: admin.php");
         }
     } else {
-        echo "Nombre de usuario o contrasena incorrectos";
-        echo "<br>";
-        echo '<a href="loginForm.php"><button type="button" class="adopt-button">Salir</button><a>';
+        echo '<p style="color: red; font-weight: bold; font-family: Arial, sans-serif;">Nombre de usuario o contraseña incorrectos</p>';
+        echo '<br>';
+        echo '<a href="loginForm.php" style="display: inline-block; background-color: #007bff; color: #fff; border: none; padding: 5px 10px; text-decoration: none; cursor: pointer; font-family: Arial, sans-serif;">Salir</a>';
+    
+    
     }
 }
 
