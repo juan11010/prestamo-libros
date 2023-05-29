@@ -26,6 +26,7 @@ if (isset($_GET['idLibros'])) {
                 $sqlUpdateLastPrestamoRel = "UPDATE prestamorel SET estatus = 0 WHERE idPrestamos = (SELECT idPrestamos FROM prestamorel WHERE idLibros = $idLibros ORDER BY idPrestamos DESC LIMIT 1)";
                 if ($conn->query($sqlUpdateLastPrestamoRel) === TRUE) {
                     echo "Libro devuelto exitosamente.";
+                    echo '<a href="miPerfil.php"><button type="button" class="adopt-button">Salir</button></a>';
                 } else {
                     echo "Error al actualizar el estatus del último préstamo en prestamorel: " . $conn->error;
                 }
@@ -78,6 +79,7 @@ if (isset($_GET['idLibros'])) {
     <p>¿Estás seguro de marcar este libro como devuelto?</p>
     <form action="" method="POST">
         <input type="submit" name="confirmar" value="Confirmar">
+        <a href=""></a>
     </form>
 </body>
 </html>
