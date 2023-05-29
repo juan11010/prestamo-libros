@@ -28,10 +28,11 @@ $conn->close();
 <html>
 <head>
     <title>Solicitar Libro</title>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
 <body>
-    <h1>Solicitar Libro</h1>
-    <form action="procesarSolicitud.php?idLibro=<?php echo $idLibro; ?>" method="post">
+    <h2>Solicitar Libro</h2>
+    <form action="procesarSolicitud.php?idLibro=<?php echo $idLibro; ?>" method="post" class="form-example">
         <label for="fechaPrestamo">Fecha de Préstamo:</label>
         <input type="date" id="fechaPrestamo" name="fechaPrestamo" required><br><br>
         
