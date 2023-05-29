@@ -7,6 +7,11 @@ if (!isset($user)) {
     header("location: loginForm.php");
     exit();
 }
+//si el usuario es de tipo 1, redirigir al perfil
+if ($_SESSION['tipo'] == 1) {
+    header("location: miPerfil.php");
+    exit();
+}
 ?>
 
 <?php
@@ -26,6 +31,8 @@ $result = $conn->query($sql);
 //obtener los libros de la base de datos
 $sql2 = "SELECT * FROM libros";
 $result2 = $conn->query($sql2);
+
+
 
 ?>
 <!DOCTYPE html>
