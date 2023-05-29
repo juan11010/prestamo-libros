@@ -2,6 +2,7 @@
 session_start();
 
 $user = $_SESSION['username'];
+$userID = $_SESSION['id'];
 
 if (!isset($user)) {
     header("location: loginForm.php");
@@ -102,7 +103,23 @@ $result2 = $conn->query($sql2);
     <!-- Inicio de zona para mostrar libros -->
     <div>
         <!--  si fechaPrestamo es dentro de 7 dias, mostrar un echo que diga que el libro esta proximo a vencer -->
-        
+        <?php
+            $fechaActual = date('Y-m-d');
+            $fechaProximoVencimiento = date('Y-m-d', strtotime('+7 days'));
+
+            $sql = "SELECT COUNT(*) AS total FROM prestamorel WHERE idUsuario =  $userID AND fechaPrestamo BETWEEN '$fechaActual' AND '$fechaProximoVencimiento'";
+            $resultado = $conn->query($sql);
+
+            if ($resultado->num_rows > 0) {
+                $row = $resultado->fetch_assoc();
+                $totalLibrosProximosVencer = $row['total'];
+                
+                if ($totalLibrosProximosVencer > 0) {
+                    echo '<h3 style="color: red; text-decoration: underline;">Tienes libros próximos a vencer en los próximos 7 días. ';
+                    echo '<a href="misLibros.php" style="color: blue;">Ir a mis libros</a></h3>';
+                }
+            }
+        ?>
         <h1>Libros disponibles:</h1>
         <form method="POST">
             <label for="mostrar_solo_disponibles">Mostrar solo disponibles:</label>

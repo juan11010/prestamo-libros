@@ -119,7 +119,7 @@ $result1 = $conn->query($sql1);
                     </td>
                     <td>
                         <?php 
-                            echo  '<a href="devolver.php?idLibro=' . $row1['idLibros'] . '">Devolver</a>';
+                            echo  '<a href="devolver.php?idLibros=' . $row1['idLibros'] . '">Devolver</a>';
                         ?>
                     </td>
                 </tr>
