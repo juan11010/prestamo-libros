@@ -10,46 +10,6 @@ if (!isset($user) && !isset($userID)) {
 }
 ?>
 
-<?php
-require_once "conexion/conexion.php";
-
-if (isset($_POST['nuevoLibro'])) {
-    $isbn = $_REQUEST['isbn'];
-    $nombre = $_REQUEST['nombre'];
-    $autor = $_REQUEST['autor'];
-    $descripcion = $_REQUEST['descripcion'];
-    $estatus = $_REQUEST['estatus'];
-    $idUsuario = $userID;
-
-    // Check if file was uploaded without errors
-    if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0) {
-        $filename = $_FILES["foto"]["name"];
-        $tempname = $_FILES["foto"]["tmp_name"];
-        $folder = "uploads/".$filename;
-
-        // Move uploaded file to uploads folder
-        if (move_uploaded_file($tempname, $folder)) {
-            echo "Imagen subida con éxito.";
-        } else {
-            echo "Error al subir la imagen.";
-        }
-    } else {
-        echo "Error: No se seleccionó ninguna imagen.";
-    }
-
-    $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario, foto) 
-            VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."', '".$filename."');";
-
-    if ($conn->query($sql) === TRUE) {
-        echo '<h2>Registro de libro Exitoso</h2><br><br>';
-        echo '<div class="button-container">';
-        echo '<a href="miPerfil.php"><button type="button" class="adopt-button">Salir</button><a>';
-        echo '</div>';
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,3 +61,42 @@ if (isset($_POST['nuevoLibro'])) {
   </script>
 </body>
 </html>
+<?php
+require_once "conexion/conexion.php";
+
+if (isset($_POST['nuevoLibro'])) {
+    $isbn = $_REQUEST['isbn'];
+    $nombre = $_REQUEST['nombre'];
+    $autor = $_REQUEST['autor'];
+    $descripcion = $_REQUEST['descripcion'];
+    $estatus = $_REQUEST['estatus'];
+    $idUsuario = $userID;
+
+    // Check if file was uploaded without errors
+    if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0) {
+        $filename = $_FILES["foto"]["name"];
+        $tempname = $_FILES["foto"]["tmp_name"];
+        $folder = "uploads/".$filename;
+
+        // Move uploaded file to uploads folder
+        move_uploaded_file($tempname, $folder);
+    } else {
+        echo "Error: No se seleccionó ninguna imagen.";
+    }
+
+    $sql = "INSERT INTO libros (isbn, nombre, autor, descripcion, estatus, idUsuario, foto) 
+            VALUES ('".$isbn."', '".$nombre."', '".$autor."', '".$descripcion."', '".$estatus."', '".$idUsuario."', '".$filename."');";
+
+    // query to update libros prestados from usuarios
+    $sql1 = "UPDATE usuarios SET librosPrestados = librosPrestados + 1 WHERE idUsuario = $idUsuario";
+
+    if ($conn->query($sql) === TRUE && $conn->query($sql1) === TRUE) {
+        echo '<h2>Registro de libro Exitoso</h2><br><br>';
+        echo '<div class="button-container">';
+        echo '<a href="miPerfil.php"><button type="button" class="button-example">Salir</button><a>';
+        echo '</div>';
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+?>
